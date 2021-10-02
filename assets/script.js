@@ -18,7 +18,9 @@ $("#cityButton").on("click", function(event){
     storeArray.push(textContent);
     localStorage.setItem("userInput", JSON.stringify(storeArray));
 
+    //calling both functions on click of search button
     citySearch(cityInput);
+    citysaveBtn();
 })
 
 
@@ -39,7 +41,7 @@ function citySearch(cityname){
         console.log(response);
         console.log(queryURL);
         //emptying div current weather
-    //$("#currentWeather").empty();
+    $("#currentWeather").empty();
     //use for displaying date when i append api call
     let today = moment();
     var mainDate = today.format ("L");
@@ -97,6 +99,29 @@ $.ajax({
         }
     })
 )};
+citysaveBtn();
+
+//Buttons that store saved data and display city name in there. Gettin items from
+//local storage
+function citysaveBtn () {
+    var lastSearch = JSON.parse(localStorage.getItem("userInput"));
+    var searchDiv = $("<button class='btn-primary btn-outline-dark mt-1 bg-primary rounded' style='width: 165px;'>").text(lastSearch);
+    var pastSearch = $("<div>");
+    pastSearch.append(searchDiv)
+    $("#searchHistory").append(pastSearch);
+}
+
+//on click for button that stores city searches and displays them
+$("#searchhistory").on('click', function(event) {
+    event.preventDefault();
+    //console.log($(this).text());
+    citySearch($(this).text(cityInput));
+
+});
+
+//buttons displaying but not routing back to citySearch function, clicking on 
+//them just reroutes the page and deletes all content on it. Doesn't save multiple
+//buttons upon reloading of page
 
 //api call for forecast
 // city: {id: 5391959, name: 'San Francisco', coord: {…}, country: 'US', population: 805235, …}
