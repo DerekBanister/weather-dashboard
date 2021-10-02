@@ -1,11 +1,8 @@
-//Steps:
-
-
 
 //declaring today date using moment.
-moment().format("L");
+//moment().format("L");
 
-
+//Steps:
 //On click event that handles the users city search. I need to make that input
 //relate to the api call and display in the currentweather div based on the city
 //that is searched. Also saving the searched items to local storage.
@@ -25,9 +22,9 @@ $("#cityButton").on("click", function(event){
 //page in my currentweather div. 
 function citySearch(cityname){
     //using weather api + cityname + my key to call this api.
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&units=standard&appid=2160410541d867a67171353419f6b95d";
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&units=imperial&appid=2160410541d867a67171353419f6b95d";
     //5-day forecast call
-    var queryURLforecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityname + "&units=standard&appid=2160410541d867a67171353419f6b95d";
+    var queryURLforecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityname + "&units=imperial&appid=2160410541d867a67171353419f6b95d";
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -37,9 +34,28 @@ function citySearch(cityname){
         //emptying div current weather
     $("#currentWeather").empty();
     //use for displaying date when i append api call
-    var mainDate = moment().format("L")
+    let today = moment();
+    var mainDate = today.format ("MMM DD, YYYY");
+    console.log(mainDate);
 
-    //create html elements to display api call
+    //create html elements to display parts of api call I want to display
+    var cityName = $("<h2>").text(response.name);
+    console.log(response.name);
+    var displayDate = $("<p>").text(mainDate);
+    console.log(displayDate);
+    var temp = $("<p>").text("Temperature: " + response.main.temp);
+    console.log(response.main.temp);
+    var humidity = $("<p>").text("Humidity: " + response.main.humidity);
+    console.log(response.main.humidity);
+    var wind =  $("<p>").text("Wind Speed: " + response.wind.speed);
+    console.log(response.wind.speed);
+
+    var weatherDisplay = $("<div>");
+    console.log(weatherDisplay);
+        //appending all to div i created
+    weatherDisplay.append(cityName, displayDate, temp, humidity, wind);
+        //targeting html element
+    $("currentWeather").html(weatherDisplay);
     }
 )}
 
@@ -57,7 +73,7 @@ function citySearch(cityname){
 //div "5day" and append those to the page. Need to figure out how to include
 //weather icons based upon the weather that day
 
-// //{ api call example for san francisco
+// //{ api call example for san francisco ************** = info I need to display
 // "coord": {
 //     "lon": -122.4194,
 //     "lat": 37.7749
@@ -65,23 +81,23 @@ function citySearch(cityname){
 //     "weather": [
 //     {
 //     "id": 800,
-//     "main": "Clear",
+//     "main": "Clear", ************************************
 //     "description": "clear sky",
 //     "icon": "01n"
 //     }
 //     ],
 //     "base": "stations",
 //     "main": {
-//     "temp": 293.66,
+//     "temp": 293.66, *************************************
 //     "feels_like": 293.46,
 //     "temp_min": 288.87,
 //     "temp_max": 300.14,
 //     "pressure": 1015,
-//     "humidity": 65
+//     "humidity": 65 **************************************
 //     },
 //     "visibility": 10000,
 //     "wind": {
-//     "speed": 1.79,
+//     "speed": 1.79, ****************************************
 //     "deg": 216,
 //     "gust": 4.47
 //     },
