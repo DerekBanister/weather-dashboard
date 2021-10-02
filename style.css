@@ -4,3 +4,13 @@
 #currentWeather{
     color: white;
 }
+h2 {
+    font-size: 50px;
+    text-align: center;
+    text-decoration: underline;
+}
+p {
+    font-size: 30px;
+    text-align: center;
+    font-style: italic;
+}

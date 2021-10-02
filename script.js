@@ -35,19 +35,19 @@ function citySearch(cityname){
     //$("#currentWeather").empty();
     //use for displaying date when i append api call
     let today = moment();
-    var mainDate = today.format ("MMM DD, YYYY");
+    var mainDate = today.format ("L");
     console.log(mainDate);
 
     //create html elements to display parts of api call I want to display
     var cityName = $("<h2>").text(response.name);
     console.log(response.name);
-    var displayDate = $("<p>").text(mainDate);
+    var displayDate = $("<p>").text("Date: " + mainDate);
     console.log(displayDate);
-    var temp = $("<p>").text("Temperature: " + response.main.temp);
+    var temp = $("<p>").text("Temperature: " + response.main.temp + " \xB0");
     console.log(response.main.temp);
-    var humidity = $("<p>").text("Humidity: " + response.main.humidity);
+    var humidity = $("<p>").text("Humidity: " + response.main.humidity + " %");
     console.log(response.main.humidity);
-    var wind =  $("<p>").text("Wind Speed: " + response.wind.speed);
+    var wind =  $("<p>").text("Wind Speed: " + response.wind.speed + " mph");
     console.log(response.wind.speed);
 
     var weatherDisplay = $("<div>");
