@@ -10,6 +10,13 @@ $("#cityButton").on("click", function(event){
     event.preventDefault();
     //grabbing user input
     var cityInput = $("#city-input").val();
+    //saving user input to local storage, have to find out how 
+    //to display it. Local storage working but overwriting key
+    //every time a city is searched
+    var textContent = $(this).siblings("#city-input").val();
+    var storeArray = [];
+    storeArray.push(textContent);
+    localStorage.setItem("userInput", JSON.stringify(storeArray));
 
     citySearch(cityInput);
 })
@@ -75,7 +82,7 @@ $.ajax({
         var fiveDay = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 140px; height: 180px;'>");
         var date = results[i].dt_txt;
         //picking first 5 dates out of string?
-        var setDate = date.substr(0,4)
+        //var setDate = date.substr(0,4)
         var temp2 = results[i].main.temp;
         var humid = results[i].main.humidity;
 
@@ -87,13 +94,8 @@ $.ajax({
         fiveDay.append(dateh4, temp2, humid);
 
         $("#5day").append(fiveDay);
-    }
-
-
-})
-
-
-
+        }
+    })
 )};
 
 //api call for forecast
