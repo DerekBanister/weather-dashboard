@@ -52,20 +52,47 @@ function citySearch(cityname){
 
     var weatherDisplay = $("<div>");
 
-    console.log(weatherDisplay);
+    //console.log(weatherDisplay);
         //appending all to div I created
     weatherDisplay.append(cityName, displayDate, temp, humidity, wind);
         //targeting html element
     $("#currentWeather").html(weatherDisplay);
-    }
-)}
+    },
 
-
-
-
-//I also need to make a call for the 5-day forecast which will display in the
+  //I also need to make a call for the 5-day forecast which will display in the
 //div "5day" and append those to the page. Need to figure out how to include
 //weather icons based upon the weather that day
+$.ajax({
+    url: queryURLforecast,
+    method: "GET"
+}).then(function (response){
+    console.log(response);
+    console.log(queryURLforecast)
+    
+
+})
+
+
+
+)};
+
+//api call for forecast
+// city: {id: 5391959, name: 'San Francisco', coord: {…}, country: 'US', population: 805235, …}
+// cnt: 40
+// cod: "200"
+// list: Array(40)
+// 0:
+// clouds: {all: 1}
+// dt: 1633197600
+// dt_txt: "2021-10-02 18:00:00" ********************
+//*********** */ main: {temp: 66.83, feels_like: 66.22, temp_min: 66.83, temp_max: 69.24, pressure: 1015, …}
+// pop: 0
+// sys: {pod: 'd'}
+// visibility: 10000
+// weather: [{…}]
+// wind: {speed: 2.89, deg: 26, gust: 4.43}
+// [[Prototype]]: Object
+
 
 // //{ api call example for san francisco ************** = info I need to display
 // "coord": {
