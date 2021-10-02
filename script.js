@@ -32,7 +32,7 @@ function citySearch(cityname){
         console.log(response);
         console.log(queryURL);
         //emptying div current weather
-    $("#currentWeather").empty();
+    //$("#currentWeather").empty();
     //use for displaying date when i append api call
     let today = moment();
     var mainDate = today.format ("MMM DD, YYYY");
@@ -51,20 +51,14 @@ function citySearch(cityname){
     console.log(response.wind.speed);
 
     var weatherDisplay = $("<div>");
+
     console.log(weatherDisplay);
-        //appending all to div i created
+        //appending all to div I created
     weatherDisplay.append(cityName, displayDate, temp, humidity, wind);
         //targeting html element
-    $("currentWeather").html(weatherDisplay);
+    $("#currentWeather").html(weatherDisplay);
     }
 )}
-
-
-
-
-
-
-
 
 
 
