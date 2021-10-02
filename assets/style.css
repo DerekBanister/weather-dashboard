@@ -1,6 +1,10 @@
 * {
     font-family: 'Bebas Neue', cursive;
 }
+body {
+    background-image: url("assets/weatherImg.jpg");
+
+}
 #currentWeather{
     color: white;
 }
@@ -13,4 +17,7 @@ p {
     font-size: 30px;
     text-align: center;
     font-style: italic;
+}
+.card1 {
+    font-size: 20px;
 }

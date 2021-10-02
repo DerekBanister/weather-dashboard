@@ -67,8 +67,28 @@ $.ajax({
     method: "GET"
 }).then(function (response){
     console.log(response);
-    console.log(queryURLforecast)
-    
+    //console.log(queryURLforecast)
+    var results = response.list
+    //looping through part of response I want
+    for (var i = 0; i < results.length; i += 8){
+        //creating area for forecast to show
+        var fiveDay = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 140px; height: 180px;'>");
+        var date = results[i].dt_txt;
+        //picking first 5 dates out of string?
+        var setDate = date.substr(0,4)
+        var temp2 = results[i].main.temp;
+        var humid = results[i].main.humidity;
+
+        //creating html for results
+        var dateh4 = $("<h4 class = 'card-title'>").text(date);
+        var temp2 = $("<p class = 'card-text card1'>").text ("Temp: " + temp2 + " \xB0");
+        var humid = $("<p class = 'card-text card1'>").text("Humidity: " + humid + " %");
+
+        fiveDay.append(dateh4, temp2, humid);
+
+        $("#5day").append(fiveDay);
+    }
+
 
 })
 
