@@ -2,7 +2,7 @@
 //CHECK WHEN I search for a city 
 //CHECK THEN I am presented with current and future conditions for that city and that city is added to the search history
 //CHECK WHEN I view current weather conditions for that city
-// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
+//CHECK THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
 // WHEN I view the UV index
 // THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
 //CHECK WHEN I view future weather conditions for that city
@@ -143,16 +143,17 @@ function citysaveBtn () {
     var searchDiv = $("<button class='btn-primary btn-outline-dark mt-1 bg-primary rounded' style='width: 165px;'>").text(lastSearch);
     var pastSearch = $("<div>");
     pastSearch.append(searchDiv)
-    $("#searchHistory").append(pastSearch);
+    //using prepend so users search history displays in correct order
+    $("#searchHistory").prepend(pastSearch);
+    //on click for button that stores city searches and displays them
+    $(searchDiv).click(function () {
+        console.log($(this).text());
+        citySearch($(this).text());
+})
 }
 
-//on click for button that stores city searches and displays them
-$("#searchhistory").on("click", ".btn", function(event) {
-    event.preventDefault();
-    //console.log($(this).text());
-    citySearch($(this).text());
 
-});
+
 
 //buttons displaying but not routing back to citySearch function, clicking on 
 //them just reroutes the page and deletes all content on it. Doesn't save multiple
