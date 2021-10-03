@@ -3,8 +3,8 @@
 //CHECK THEN I am presented with current and future conditions for that city and that city is added to the search history
 //CHECK WHEN I view current weather conditions for that city
 //CHECK THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-// WHEN I view the UV index
-// THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
+//CHECK WHEN I view the UV index
+//CHECK THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
 //CHECK WHEN I view future weather conditions for that city
 //CHECK THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
 //CHECK WHEN I click on a city in the search history
@@ -99,6 +99,25 @@ function citySearch(cityname){
     weatherDisplay.append(cityName, displayDate, temp, humidity, wind, currentIcon);
         //targeting html element
     $("#currentWeather").html(weatherDisplay);
+
+var lat = response.coord.lat;
+var lon = response.coord.lon;
+var queryURLUV = "https://api.openweathermap.org/data/2.5/uvi?&appid=2160410541d867a67171353419f6b95d&lat=" + lat  + "&lon=" + lon;
+
+        $.ajax({
+            url: queryURLUV,
+            method: 'GET'
+        }).then(function (response) {
+            console.log(response);
+            //need uv value, coordinate variables above work
+            $('#uv-display').empty();
+            var uvResults = response.value;
+            //uv box appending in weird spot, need to figure out where it goes
+            var uvBox = $("<button class='btn bg-success uvBtn'>").text("UV Index: " + uvResults);
+      
+            $('#uv-display').html(uvBox);
+    
+        });
     },
 
   //I also need to make a call for the 5-day forecast which will display in the
@@ -152,12 +171,6 @@ function citysaveBtn () {
 })
 }
 
-
-
-
-//buttons displaying but not routing back to citySearch function, clicking on 
-//them just reroutes the page and deletes all content on it. Doesn't save multiple
-//buttons upon reloading of page
 
 //api call for forecast
 // city: {id: 5391959, name: 'San Francisco', coord: {…}, country: 'US', population: 805235, …}
