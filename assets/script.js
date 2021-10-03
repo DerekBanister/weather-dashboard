@@ -110,13 +110,20 @@ var queryURLUV = "https://api.openweathermap.org/data/2.5/uvi?&appid=2160410541d
         }).then(function (response) {
             console.log(response);
             //need uv value, coordinate variables above work
-            $('#uv-display').empty();
+            $("#uv-display").empty();
             var uvResults = response.value;
             //uv box appending in weird spot, need to figure out where it goes
-            var uvBox = $("<button class='btn bg-success uvBtn'>").text("UV Index: " + uvResults);
+            var uvBox = $("<button class='btn uvBtn'>").text("UV Index: " + uvResults);
       
-            $('#uv-display').html(uvBox);
-    
+            $("#uv-display").html(uvBox);
+
+            if (uvResults <= 2){
+                uvBox.attr("style", "background-color: green")
+               }else if(uvResults <=5){
+                uvBox.attr("style", "background-color: yellow")
+               }else if(uvResults > 5) {
+                   uvBox.attr("style", "background-color: red")
+               }
         });
     },
 
