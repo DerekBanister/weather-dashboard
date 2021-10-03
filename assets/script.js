@@ -21,8 +21,8 @@ $("#cityButton").on("click", function(event){
     event.preventDefault();
     //grabbing user input
     var cityInput = $("#city-input").val();
-    //saving user input to local storage, have to find out how 
-    //to display it. Local storage working but overwriting key
+    //saving user input to local storage
+    //Local storage working but overwriting key
     //every time a city is searched
     var textContent = $(this).siblings("#city-input").val();
     var storeArray = [];
@@ -71,17 +71,32 @@ function citySearch(cityname){
     console.log(response.wind.speed);
     var weatherIcon = response.weather[0].main;
     console.log(response.weather[0].main);
-        //if else? statements that display weather icons from openweathermap
-
-
-
-
+       //if else? statements that display weather icons from openweathermap
+       //https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
+       
+       if (weatherIcon === "Clouds"){
+            var currentIcon = $("<img>").attr("src", "http://openweathermap.org/img/wn/02d.png")
+            currentIcon.attr("style", "height: 100px; width: 100px")
+        } else if (weatherIcon === "Clear"){
+            var currentIcon = $("<img>").attr("src", "http://openweathermap.org/img/wn/01d.png")
+            currentIcon.attr("style", "height: 100px; width: 100px")
+        } else if (weatherIcon === "Smoke"){
+            var currentIcon = $("<img>").attr("src", "http://openweathermap.org/img/wn/50d.png")
+            currentIcon.attr("style", "height: 100px; width: 100px")
+        } else if (currentweather === "Drizzle") {
+            var currentIcon = $("<img>").attr("src", "http://openweathermap.org/img/wn/10d.png");
+            currentIcon.attr("style", "height: 100px; width: 100px");
+        } else if (currentweather === "Rain") {
+            var currentIcon = $("<img>").attr("src", "http://openweathermap.org/img/wn/09d.png");
+            currentIcon.attr("style", "height: 100px; width: 100px");
+        } else if (currentweather === "Snow") {
+            var currentIcon = $("<img>").attr("src", "http://openweathermap.org/img/wn/13d.png");
+            currentIcon.attr("style", "height: 100px; width: 100px");
+        }
 
     var weatherDisplay = $("<div>");
-
-    //console.log(weatherDisplay);
         //appending all to div I created
-    weatherDisplay.append(cityName, displayDate, temp, humidity, wind);
+    weatherDisplay.append(cityName, displayDate, temp, humidity, wind, currentIcon);
         //targeting html element
     $("#currentWeather").html(weatherDisplay);
     },
@@ -96,6 +111,8 @@ $.ajax({
     console.log(response);
     //console.log(queryURLforecast)
     var results = response.list
+    //need to empty display area as results are stacking
+    $("#5day").empty();
     //looping through part of response I want
     for (var i = 0; i < results.length; i += 8){
         //creating area for forecast to show
@@ -130,10 +147,10 @@ function citysaveBtn () {
 }
 
 //on click for button that stores city searches and displays them
-$("#searchhistory").on('click', function(event) {
+$("#searchhistory").on("click", ".btn", function(event) {
     event.preventDefault();
     //console.log($(this).text());
-    citySearch($(this).text(cityInput));
+    citySearch($(this).text());
 
 });
 
