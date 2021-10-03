@@ -28,3 +28,8 @@ p {
     float: right;
 
 }
+img {
+    border:white 2px solid;
+    position:relative;  bottom: 17px; left: 20px;
+    border-spacing: 0px;
+}
