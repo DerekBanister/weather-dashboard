@@ -1,19 +1,6 @@
-//CHECK GIVEN a weather dashboard with form inputs    
-//CHECK WHEN I search for a city 
-//CHECK THEN I am presented with current and future conditions for that city and that city is added to the search history
-//CHECK WHEN I view current weather conditions for that city
-//CHECK THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-//CHECK WHEN I view the UV index
-//CHECK THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-//CHECK WHEN I view future weather conditions for that city
-//CHECK THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
-//CHECK WHEN I click on a city in the search history
-//CHECK THEN I am again presented with current and future conditions for that city
-
 //declaring today date using moment.
 moment().format("L");
 
-//Steps:
 //On click event that handles the users city search. I need to make that input
 //relate to the api call and display in the currentweather div based on the city
 //that is searched. Also saving the searched items to local storage.
@@ -33,9 +20,6 @@ $("#cityButton").on("click", function(event){
     citySearch(cityInput);
     citysaveBtn();
 })
-
-
-//API CALL WORKING ON CLICK BASED ON USER INPUT
 
 //First setup a function that gets the weather api. Then that function will
 //get the day's weather and eventually append those results to the 
@@ -71,7 +55,7 @@ function citySearch(cityname){
     console.log(response.wind.speed);
     var weatherIcon = response.weather[0].main;
     console.log(response.weather[0].main);
-       //if else? statements that display weather icons from openweathermap
+       //if else statements that display weather icons from openweathermap
        //https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
        
        if (weatherIcon === "Clouds"){
@@ -111,8 +95,8 @@ var queryURLUV = "https://api.openweathermap.org/data/2.5/uvi?&appid=2160410541d
             console.log(response);
             //need uv value, coordinate variables above work
             $("#uv-display").empty();
+           
             var uvResults = response.value;
-            //uv box appending in weird spot, need to figure out where it goes
             var uvBox = $("<button class='btn uvBtn'>").text("UV Index: " + uvResults);
       
             $("#uv-display").html(uvBox);
@@ -144,8 +128,6 @@ $.ajax({
         //creating area for forecast to show
         var fiveDay = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 140px; height: 180px;'>");
         var date = results[i].dt_txt;
-        //picking first 5 dates out of string?
-        //var setDate = date.substr(0,4)
         var temp2 = results[i].main.temp;
         var humid = results[i].main.humidity;
 
@@ -162,7 +144,7 @@ $.ajax({
 )};
 citysaveBtn();
 
-//Buttons that store saved data and display city name in there. Gettin items from
+//Buttons that store saved data and display city name in there. Getting items from
 //local storage
 function citysaveBtn () {
     var lastSearch = JSON.parse(localStorage.getItem("userInput"));
@@ -176,68 +158,4 @@ function citysaveBtn () {
         console.log($(this).text());
         citySearch($(this).text());
 })
-}
-
-
-//api call for forecast
-// city: {id: 5391959, name: 'San Francisco', coord: {…}, country: 'US', population: 805235, …}
-// cnt: 40
-// cod: "200"
-// list: Array(40)
-// 0:
-// clouds: {all: 1}
-// dt: 1633197600
-// dt_txt: "2021-10-02 18:00:00" ********************
-//*********** */ main: {temp: 66.83, feels_like: 66.22, temp_min: 66.83, temp_max: 69.24, pressure: 1015, …}
-// pop: 0
-// sys: {pod: 'd'}
-// visibility: 10000
-// weather: [{…}]
-// wind: {speed: 2.89, deg: 26, gust: 4.43}
-// [[Prototype]]: Object
-
-
-// //{ api call example for san francisco ************** = info I need to display
-// "coord": {
-//     "lon": -122.4194,
-//     "lat": 37.7749
-//     },
-//     "weather": [
-//     {
-//     "id": 800,
-//     "main": "Clear", ************************************
-//     "description": "clear sky",
-//     "icon": "01n"
-//     }
-//     ],
-//     "base": "stations",
-//     "main": {
-//     "temp": 293.66, *************************************
-//     "feels_like": 293.46,
-//     "temp_min": 288.87,
-//     "temp_max": 300.14,
-//     "pressure": 1015,
-//     "humidity": 65 **************************************
-//     },
-//     "visibility": 10000,
-//     "wind": {
-//     "speed": 1.79, ****************************************
-//     "deg": 216,
-//     "gust": 4.47
-//     },
-//     "clouds": {
-//     "all": 1
-//     },
-//     "dt": 1633143073,
-//     "sys": {
-//     "type": 2,
-//     "id": 2016474,
-//     "country": "US",
-//     "sunrise": 1633097127,
-//     "sunset": 1633139567
-//     },
-//     "timezone": -25200,
-//     "id": 5391959,
-//     "name": "San Francisco",
-//     "cod": 200
-//     }
+};

@@ -30,6 +30,7 @@ p {
 }
 img {
     border:white 2px solid;
-    position:relative;  bottom: 17px; left: 20px;
+    border-radius: 15%;
+    position:relative;  bottom: 17px; left: 5px;
     border-spacing: 0px;
 }
