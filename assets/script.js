@@ -7,8 +7,8 @@
 // THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
 //CHECK WHEN I view future weather conditions for that city
 //CHECK THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
-// WHEN I click on a city in the search history
-// THEN I am again presented with current and future conditions for that city
+//CHECK WHEN I click on a city in the search history
+//CHECK THEN I am again presented with current and future conditions for that city
 
 //declaring today date using moment.
 moment().format("L");
