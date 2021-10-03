@@ -127,7 +127,7 @@ $.ajax({
     for (var i = 0; i < results.length; i += 8){
         //creating area for forecast to show
         var fiveDay = $("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 140px; height: 180px;'>");
-        var date = results[i].dt_txt;
+        var date = new Date (results[i].dt * 1000).toLocaleDateString('en-US');
         var temp2 = results[i].main.temp;
         var humid = results[i].main.humidity;
 
