@@ -1,6 +1,12 @@
 * {
     font-family: 'Bebas Neue', cursive; 
 }
+body {
+    background-image:  url("../assets/clouds.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 #currentWeather{
     color: white;
 }
