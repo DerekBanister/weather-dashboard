@@ -8,6 +8,7 @@ body {
     background-repeat: no-repeat;
 }
 #currentWeather{
+    
     color: white;
 }
 h2 {
@@ -34,3 +35,11 @@ img {
     position:relative;  bottom: 17px; left: 5px;
     border-spacing: 0px;
 }
+.card {
+    opacity: 0.8;
+}
+.row {
+    opacity: 0.8;
+    border-radius: 10%;
+}
+
